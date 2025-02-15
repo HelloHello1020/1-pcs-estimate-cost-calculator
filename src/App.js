@@ -213,6 +213,7 @@ function App() {
 
   return (
     <div className="app">
+      <div className="overlay"></div>
       {/* From and To dropdowns */}
       <div className="dropdowns">
         <select
@@ -285,7 +286,7 @@ function App() {
         </button>
       </div>
 
-      <h1 className="estimate-cost" ref={estimateCost}>Estimated Cost</h1>
+      <h2 className="estimate-cost" ref={estimateCost}>Estimated Cost</h2>
       <a className="page-link" ref={pageLink} href="https://www.facebook.com/share/1Dsn9K7jrQ/?mibextid=wwXIfr" target="_blank">Hello Logistics Thailand Page</a>
     </div>
   );
