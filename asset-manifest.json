@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/1-pcs-estimate-cost-calculator/static/css/main.17960ee3.css",
+    "main.js": "/1-pcs-estimate-cost-calculator/static/js/main.8214da05.js",
+    "static/js/453.651c6d6e.chunk.js": "/1-pcs-estimate-cost-calculator/static/js/453.651c6d6e.chunk.js",
+    "index.html": "/1-pcs-estimate-cost-calculator/index.html",
+    "main.17960ee3.css.map": "/1-pcs-estimate-cost-calculator/static/css/main.17960ee3.css.map",
+    "main.8214da05.js.map": "/1-pcs-estimate-cost-calculator/static/js/main.8214da05.js.map",
+    "453.651c6d6e.chunk.js.map": "/1-pcs-estimate-cost-calculator/static/js/453.651c6d6e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17960ee3.css",
+    "static/js/main.8214da05.js"
+  ]
+}
