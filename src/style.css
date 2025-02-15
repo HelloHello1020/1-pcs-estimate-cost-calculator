@@ -1,0 +1,42 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  gap: 15px;
+  width: 100%;
+}
+
+select,
+input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+div {
+  display: flex;
+  gap: 10px;
+}
+
+.from-dropdown,
+.to-dropdown {
+  width: 150px;
+}
+
+button.calculate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.estimate-cost {
+  text-align: center;
+}
