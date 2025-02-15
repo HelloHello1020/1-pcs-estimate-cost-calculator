@@ -214,7 +214,7 @@ function App() {
   return (
     <div className="app">
       {/* From and To dropdowns */}
-      <div>
+      <div className="dropdowns">
         <select
           className="from-dropdown dropdown"
           value={selectedOption1}
@@ -243,7 +243,7 @@ function App() {
       </div>
 
       {/* Weight input with kg */}
-      <div>
+      <div className="weight-input">
         <input
           type="number"
           value={weight}
@@ -254,7 +254,7 @@ function App() {
       </div>
 
       {/* Length, Width, and Height inputs */}
-      <div>
+      <div className="size-input">
         <input
           type="number"
           value={length}

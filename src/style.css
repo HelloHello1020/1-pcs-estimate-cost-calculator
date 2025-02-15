@@ -37,10 +37,17 @@ button.calculate-button {
   margin-top: 20px;
 }
 
+@media (max-width: 550px) {
+  .size-input {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .estimate-cost {
   text-align: center;
 }
 
 .page-link {
-  margin-top: 18rem;
+  margin-top: 10rem;
 }
