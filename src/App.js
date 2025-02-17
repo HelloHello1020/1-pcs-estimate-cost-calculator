@@ -209,6 +209,10 @@ function App() {
         estimateCost.current.innerText = `฿${Math.round(weight * 50)}\n(Only using weight)\nClick the link below to negotiate about the full price`
       }
     }
+
+    else {
+      estimateCost.current.innerText = "Not available"
+    }
   };
 
   return (
