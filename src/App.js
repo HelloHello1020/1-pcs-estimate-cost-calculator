@@ -189,24 +189,24 @@ function App() {
 
       else if (weight >= 4.1 && weight <= 10) {
         if (length > 14 || width > 14 || height > 14) {
-          estimateCost.current.innerText = `฿${weight * 65}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 65)}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
         else {
-          estimateCost.current.innerText = `฿${weight * 65}`
+          estimateCost.current.innerText = `฿${Math.round(weight * 65)}`
         }
       }
 
       else if (weight >= 10.1 && weight <= 100) {
         if (length > 18 || width > 18 || height > 18) {
-          estimateCost.current.innerText = `฿${weight * 55}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 55)}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
         else {
-          estimateCost.current.innerText = `฿${weight * 55}`
+          estimateCost.current.innerText = `฿${Math.round(weight * 55)}`
         }
       }
 
       else {
-        estimateCost.current.innerText = `฿${weight * 50}\n(Only using weight)\nClick the link below to negotiate about the full price`
+        estimateCost.current.innerText = `฿${Math.round(weight * 50)}\n(Only using weight)\nClick the link below to negotiate about the full price`
       }
     }
   };
