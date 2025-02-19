@@ -436,7 +436,7 @@ function App() {
         </select>
       </div>
 
-      {selectedItemOption1 === "Monitor" || selectedItemOption1 === "TV" && 
+      {(selectedItemOption1 === "Monitor" || selectedItemOption1 === "TV") && 
         <div className="device-length-input">
         <input
           className="device-length-input-box"
