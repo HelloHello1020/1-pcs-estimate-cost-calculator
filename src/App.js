@@ -18,7 +18,7 @@ function App() {
   const pageLink = useRef()
 
   const handleCalculate = () => {
-    if (setSelectedItemOption === "Others") {
+    if (selectedItemOption1 === "Others") {
       if ((selectedOption1 === "Maesot" && selectedOption2 === "Chiang Mai") || (selectedOption1 === "Chiang Mai" && selectedOption2 === "Maesot")) {
         if (weight <= 3) {
           if (length > 12 || width > 12 || height > 12) {
@@ -410,10 +410,6 @@ function App() {
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
         estimateCost.current.innerText = `฿800`
       }
-    }
-
-    else {
-      estimateCost.current.innerText = `Not available`
     }
   };
 
