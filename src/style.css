@@ -37,8 +37,14 @@ div {
 }
 
 .from-dropdown,
-.to-dropdown {
+.to-dropdown,
+.item-type-dropdown {
   width: 150px;
+  font-size: 15px;
+}
+
+.device-length-input-box {
+  width: 200px;
 }
 
 button.calculate-button {
