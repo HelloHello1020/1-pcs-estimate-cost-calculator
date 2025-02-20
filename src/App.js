@@ -40,7 +40,7 @@ function App() {
         if (weight <= 3) {
           homeDeliveryCost = `\n2500 MMK`;
         } else {
-          homeDeliveryCost = `\n${Math.round(weight * 350)} MMK`;
+          homeDeliveryCost = `\n${Math.round(((weight - 3) * 350) + 2500)} MMK`;
         }
       }
     }
@@ -48,18 +48,18 @@ function App() {
     else if (selectedOption2 === "Mandalay") {
       if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 48 Street") {
         homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(weight * 1000)} MMK`
+          ? `\n${Math.round(((weight - 3) * 1000) + 3000)} MMK`
           : `\n3000 MMK`;
       }
       else if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 92 Street") {
         homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(weight * 1000)} MMK`
-          : `\n4000 MMK`;
+        ? `\n${Math.round(((weight - 3) * 1000) + 4000)} MMK`
+        : `\n4000 MMK`;
       }
       else if (selectedHomeDelivery === "Others") {
         homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(weight * 1000)} MMK`
-          : `\n5000 MMK`;
+        ? `\n${Math.round(((weight - 3) * 1000) + 5000)} MMK`
+        : `\n5000 MMK`;
       }
     }
 
