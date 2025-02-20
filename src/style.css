@@ -43,7 +43,8 @@ div {
   font-size: 15px;
 }
 
-.device-length-input-box {
+.device-length-input-box,
+.home-delivery-dropdown {
   width: 200px;
 }
 

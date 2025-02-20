@@ -1,11 +1,11 @@
 import "./style.css"
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 function App() {
   const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]
   const locationOptions = ['Maesot', 'Yangon', 'Mandalay', 'Chiang Mai', 'Myawaddy', 'Bangkok'];
 
-  const [selectedItemOption1, setSelectedItemOption] = useState("")
+  const [selectedItemOption1, setSelectedItemOption] = useState("");
   const [deviceLength, setDeviceLength] = useState("");
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
@@ -13,51 +13,96 @@ function App() {
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
+  const [homeDeliveryOptions, setHomeDeliveryOptions] = useState([]);
+  const [selectedHomeDelivery, setSelectedHomeDelivery] = useState("");
+
+  const homeDeliveryLocations = {
+    Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others"],
+    Mandalay: ["19 Street, 15 Street x 58 Street, 48 Street", "19 Street, 15 Street x 58 Street, 92 Street", "Others"],
+  };
+
+  let homeDeliveryCost = ``;
+
+  useEffect(() => {
+    setHomeDeliveryOptions(homeDeliveryLocations[selectedOption2] || []);
+  }, [selectedOption2]);
 
   const estimateCost = useRef()
   const pageLink = useRef()
 
   const handleCalculate = () => {
+    homeDeliveryCost = ""; // Reset cost
+  
+    if (selectedOption2 === "Yangon") {
+      if (["Dala", "Thanlyin", "Hmawbi"].includes(selectedHomeDelivery)) {
+        homeDeliveryCost = `\n(Negotiate for the Door2Door cost)`;
+      } else if (selectedHomeDelivery === "Others") {
+        if (weight <= 3) {
+          homeDeliveryCost = `\n2500 MMK`;
+        } else {
+          homeDeliveryCost = `\n${Math.round(weight * 350)} MMK`;
+        }
+      }
+    }
+  
+    else if (selectedOption2 === "Mandalay") {
+      if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 48 Street") {
+        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+          ? `\n${Math.round(weight * 1000)} MMK`
+          : `\n3000 MMK`;
+      }
+      else if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 92 Street") {
+        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+          ? `\n${Math.round(weight * 1000)} MMK`
+          : `\n4000 MMK`;
+      }
+      else if (selectedHomeDelivery === "Others") {
+        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+          ? `\n${Math.round(weight * 1000)} MMK`
+          : `\n5000 MMK`;
+      }
+    }
+
     if (selectedItemOption1 === "Others") {
       if ((selectedOption1 === "Maesot" && selectedOption2 === "Chiang Mai") || (selectedOption1 === "Chiang Mai" && selectedOption2 === "Maesot")) {
         if (weight <= 3) {
           if (length > 12 || width > 12 || height > 12) {
-            estimateCost.current.innerText = "฿130\n(฿30 for extra box size)"
+            estimateCost.current.innerText = `฿${130}${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = "฿100"
+            estimateCost.current.innerText = `฿${100}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 3.1 && weight <= 10) {
           if (length > 18 || width > 18 || height > 18) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 35 + 30)}\n(฿30 for extra box size)`
+            estimateCost.current.innerText = `฿${Math.round(weight * 35 + 30)}${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 35)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 35)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 10.1 && weight <= 15) {
           if (length > 24 || width > 24 || height > 24) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 30 + 30)}\n(฿30 for extra box size)`
+            estimateCost.current.innerText = `฿${Math.round(weight * 30 + 30)}${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 30)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 30)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 15.1 && weight <= 20) {
           if (length > 24 || width > 24 || height > 24) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 25)}\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 25)}${homeDeliveryCost}\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 25)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 25)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 20.1 && weight <= 100) {
-          estimateCost.current.innerText = `฿${Math.round(weight * 20)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 20)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
 
         else {
@@ -68,347 +113,347 @@ function App() {
       else if ((selectedOption1 === "Maesot" && selectedOption2 === "Yangon") || (selectedOption1 === "Maesot" && selectedOption2 === "Mandalay") || (selectedOption1 === "Yangon" && selectedOption2 === "Maesot") || (selectedOption1 === "Mandalay" && selectedOption2 === "Maesot")) {
         if (weight <= 2) {
           if (length > 6 || width > 6 || height > 6) {
-            estimateCost.current.innerText = `฿120\n(฿20 for extra box size)`
+            estimateCost.current.innerText = `฿120${homeDeliveryCost}\n(฿20 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿100`
+            estimateCost.current.innerText = `฿100${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 2.1 && weight <= 3) {
           if (length > 8 || width > 8 || height > 8) {
-            estimateCost.current.innerText = `฿180\n(฿30 for extra box size)`
+            estimateCost.current.innerText = `฿180${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿150`
+            estimateCost.current.innerText = `฿150${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 3.1 && weight <= 4) {
           if (length > 12 || width > 12 || height > 12) {
-            estimateCost.current.innerText = `฿250\n($50 for extra box size)`
+            estimateCost.current.innerText = `฿250${homeDeliveryCost}\n($50 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿200`
+            estimateCost.current.innerText = `฿200${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 4.1 && weight <= 10) {
           if (length > 18 || width > 18 || height > 18) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 50 + 50)}\n(฿50 for extra box size)`
+            estimateCost.current.innerText = `฿${Math.round(weight * 50 + 50)}${homeDeliveryCost}\n(฿50 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 50)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 50)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 10.1 && weight <= 100) {
-          estimateCost.current.innerText = `฿${Math.round(weight * 45)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 45)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
 
         else {
-          estimateCost.current.innerText = `฿${Math.round(weight * 35)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 35)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
 
       else if (selectedOption1 === "Myawaddy" && selectedOption2 === "Maesot") {
         if (weight <= 5) {
           if (length > 12 || width > 12 || height > 12) {
-            estimateCost.current.innerText = `฿180\n(฿30 for extra box size)`
+            estimateCost.current.innerText = `฿180${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿150`
+            estimateCost.current.innerText = `฿150${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 5.1 && weight <= 20) {
           if (length > 24 || width > 24 || height > 24) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 35 + 20)}\n(฿20 for extra box size)`
+            estimateCost.current.innerText = `฿${Math.round(weight * 35 + 20)}${homeDeliveryCost}\n(฿20 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 35)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 35)}${homeDeliveryCost}`
           }
         }
 
         else {
-          estimateCost.current.innerText = `฿${Math.round(weight * 30)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 30)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
 
       else if (selectedOption1 === "Maesot" && selectedOption2 === "Myawaddy") {
         if (weight <= 5) {
           if (length > 12 || width > 12 || height > 12) {
-            estimateCost.current.innerText = `17000 MMK\n(2000 MMK for extra box size)`
+            estimateCost.current.innerText = `17000 MMK${homeDeliveryCost}\n(2000 MMK for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `15000 MMK`
+            estimateCost.current.innerText = `15000 MMK${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 5.1 && weight <= 20) {
           if (length > 24 || width > 24 || height > 24) {
-            estimateCost.current.innerText = `${Math.round(weight * 2500 + 2000)} MMK\n(2000 for extra box size)`
+            estimateCost.current.innerText = `${Math.round(weight * 2500 + 2000)} MMK${homeDeliveryCost}\n(2000 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `${Math.round(weight * 2500)} MMK`
+            estimateCost.current.innerText = `${Math.round(weight * 2500)} MMK${homeDeliveryCost}`
           }
         }
 
         else {
-          estimateCost.current.innerText = `${Math.round(weight * 1500)} MMK\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `${Math.round(weight * 1500)} MMK${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
 
       else if ((selectedOption1 === "Chiang Mai" && selectedOption2 === "Yangon") || (selectedOption1 === "Chiang Mai" && selectedOption2 === "Mandalay") || (selectedOption1 === "Yangon" && selectedOption2 === "Chiang Mai") || (selectedOption1 === "Mandalay" && selectedOption2 === "Chiang Mai")) {
         if (weight < 2) {
           if (length > 6 || width > 6 || height > 6) {
-            estimateCost.current.innerText = `฿170\n(฿20 for extra box size)`
+            estimateCost.current.innerText = `฿170${homeDeliveryCost}\n(฿20 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿150`
+            estimateCost.current.innerText = `฿150${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 2.1 && weight <= 3) {
           if (length > 8 || width > 8 || height > 8) {
-            estimateCost.current.innerText = `฿230\n(฿30 for extra box size)`
+            estimateCost.current.innerText = `฿230${homeDeliveryCost}\n(฿30 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿200`
+            estimateCost.current.innerText = `฿200${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 3.1 && weight <= 4) {
           if (length > 12 || width > 12 || height > 12) {
-            estimateCost.current.innerText = `฿350\n(฿50 for extra box size)`
+            estimateCost.current.innerText = `฿350${homeDeliveryCost}\n(฿50 for extra box size)`
           }
           else {
-            estimateCost.current.innerText = `฿300`
+            estimateCost.current.innerText = `฿300${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 4.1 && weight <= 10) {
           if (length > 18 || width > 18 || height > 18) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 60)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 60)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 60)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 60)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 10.1 && weight <= 100) {
-          estimateCost.current.innerText = `฿${Math.round(weight * 55)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 55)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
 
         else {
-          estimateCost.current.innerText = `฿${Math.round(weight * 45)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 45)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
 
       else if (selectedOption1 === "Bangkok" && selectedOption2 === "Yangon" || selectedOption1 === "Bangkok" && selectedOption2 === "Mandalay") {
         if (weight <= 4) {
           if (length > 10 || width > 10 || height > 10) {
-            estimateCost.current.innerText = `฿350\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿350${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿350`
+            estimateCost.current.innerText = `฿350${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 4.1 && weight <= 10) {
           if (length > 14 || width > 14 || height > 14) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 65)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 65)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 65)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 65)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 10.1 && weight <= 100) {
           if (length > 18 || width > 18 || height > 18) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 55)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 55)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 55)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 55)}${homeDeliveryCost}`
           }
         }
 
         else {
-          estimateCost.current.innerText = `฿${Math.round(weight * 50)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 50)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
 
       else if (selectedOption1 === "Yangon" && selectedOption2 === "Bangkok" || selectedOption1 === "Mandalay" && selectedOption2 === "Bangkok") {
         if (weight <= 4) {
           if (length > 10 || width > 10 || height > 10) {
-            estimateCost.current.innerText = `฿400\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿400${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿400`
+            estimateCost.current.innerText = `฿400${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 4.1 && weight <= 10) {
           if (length > 14 || width > 14 || height > 14) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 70)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 70)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 70)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 70)}${homeDeliveryCost}`
           }
         }
 
         else if (weight >= 10.1 && weight <= 100) {
           if (length > 18 || width > 18 || height > 18) {
-            estimateCost.current.innerText = `฿${Math.round(weight * 60)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+            estimateCost.current.innerText = `฿${Math.round(weight * 60)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
           }
           else {
-            estimateCost.current.innerText = `฿${Math.round(weight * 60)}`
+            estimateCost.current.innerText = `฿${Math.round(weight * 60)}${homeDeliveryCost}`
           }
         }
 
         else {
-          estimateCost.current.innerText = `฿${Math.round(weight * 55)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          estimateCost.current.innerText = `฿${Math.round(weight * 55)}${homeDeliveryCost}\n(Only using weight)\nClick the link below to negotiate about the full price`
         }
       }
     }
 
     else if (selectedItemOption1 === "Phone") {
       if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-        estimateCost.current.innerText = `฿400`
+        estimateCost.current.innerText = `฿400${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿500`
+        estimateCost.current.innerText = `฿500${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿600`
+        estimateCost.current.innerText = `฿600${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Laptop/Macbook") {
       if (((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) || (selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿700`
+        estimateCost.current.innerText = `฿700${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿900`
+        estimateCost.current.innerText = `฿900${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Printer") {
       if (((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) || (selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿900`
+        estimateCost.current.innerText = `฿900${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿1000`
+        estimateCost.current.innerText = `฿1000${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Tablet/IPad") {
       if (((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) || (selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿500`
+        estimateCost.current.innerText = `฿500${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿600`
+        estimateCost.current.innerText = `฿600${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Monitor") {
       if (deviceLength <= 24) {
         if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 60)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 60)}${homeDeliveryCost}`
         }
   
         else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}${homeDeliveryCost}`
         }
   
         else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 80)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 80)}${homeDeliveryCost}`
         }
       }
 
       else {
         if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 50)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 50)}${homeDeliveryCost}`
         }
   
         else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 60)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 60)}${homeDeliveryCost}`
         }
   
         else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-          estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}`
+          estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}${homeDeliveryCost}`
         }
       }
     }
 
     else if (selectedItemOption1 === "CPU") {
       if (((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) || (selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿900`
+        estimateCost.current.innerText = `฿900${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿1200`
+        estimateCost.current.innerText = `฿1200${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "TV") {
       if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-        estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}`
+        estimateCost.current.innerText = `฿${Math.round(deviceLength * 70)}${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿${Math.round(deviceLength * 80)}`
+        estimateCost.current.innerText = `฿${Math.round(deviceLength * 80)}${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿${Math.round(deviceLength * 90)}`
+        estimateCost.current.innerText = `฿${Math.round(deviceLength * 90)}${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Air Cooler") {
       if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-        estimateCost.current.innerText = `฿800 - ฿1500`
+        estimateCost.current.innerText = `฿800 - ฿1500${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿900 - ฿1600`
+        estimateCost.current.innerText = `฿900 - ฿1600${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿1000 - ฿1800`
+        estimateCost.current.innerText = `฿1000 - ฿1800${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Air Fryer") {
       if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-        estimateCost.current.innerText = `฿300 - ฿400`
+        estimateCost.current.innerText = `฿300 - ฿400${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿400 - ฿500`
+        estimateCost.current.innerText = `฿400 - ฿500${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿500 - ฿600`
+        estimateCost.current.innerText = `฿500 - ฿600${homeDeliveryCost}`
       }
     }
 
     else if (selectedItemOption1 === "Guiter") {
       if ((selectedOption1 === "Maesot" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Maesot")) {
-        estimateCost.current.innerText = `฿600`
+        estimateCost.current.innerText = `฿600${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Chiang Mai" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Chiang Mai")) {
-        estimateCost.current.innerText = `฿700`
+        estimateCost.current.innerText = `฿700${homeDeliveryCost}`
       }
 
       else if ((selectedOption1 === "Bangkok" && (selectedOption2 === "Myawaddy" || selectedOption2 === "Mandalay" || selectedOption2 === "Yangon")) || ((selectedOption1 === "Myawaddy" || selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") && selectedOption2 === "Bangkok")) {
-        estimateCost.current.innerText = `฿800`
+        estimateCost.current.innerText = `฿800${homeDeliveryCost}`
       }
     }
   };
@@ -473,6 +518,25 @@ function App() {
           ))}
         </select>
       </div>
+
+      {homeDeliveryOptions.length > 0 && (
+        <div className="home-delivery">
+          <select
+            className="home-delivery-dropdown dropdown"
+            value={selectedHomeDelivery}
+            onChange={(e) => setSelectedHomeDelivery(e.target.value)}
+          >
+            <option value="">Door2Door Location</option>
+            {homeDeliveryOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+        </div>
+      )}
+
       {/* Weight input with kg */}
       <div className="weight-input">
         <input
