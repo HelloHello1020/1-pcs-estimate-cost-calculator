@@ -18,7 +18,7 @@ function App() {
 
   const homeDeliveryLocations = {
     Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others"],
-    Mandalay: ["19 Street, 15 Street x 58 Street, 48 Street", "19 Street, 15 Street x 58 Street, 92 Street", "Others"],
+    Mandalay: ["19 Street, 115 Street x 58 Street, 48 Street", "19 Street, 115 Street x 58 Street, 92 Street", "Others"],
   };
 
   let homeDeliveryCost = ``;
@@ -46,20 +46,25 @@ function App() {
     }
   
     else if (selectedOption2 === "Mandalay") {
-      if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 48 Street") {
-        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(((weight - 3) * 1000) + 3000)} MMK`
-          : `\n3000 MMK`;
+      if (weight > 10 || (length > 24 && width > 24 && height > 24)) {
+        homeDeliveryCost = `\n(Negotiate for the Door2Door cost)`;
       }
-      else if (selectedHomeDelivery === "19 Street, 15 Street x 58 Street, 92 Street") {
-        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-        ? `\n${Math.round(((weight - 3) * 1000) + 4000)} MMK`
-        : `\n4000 MMK`;
-      }
-      else if (selectedHomeDelivery === "Others") {
-        homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-        ? `\n${Math.round(((weight - 3) * 1000) + 5000)} MMK`
-        : `\n5000 MMK`;
+      else {
+        if (selectedHomeDelivery === "19 Street, 115 Street x 58 Street, 48 Street") {
+          homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+            ? `\n${Math.round(((weight - 3) * 1000) + 3000)} MMK`
+            : `\n3000 MMK`;
+        }
+        else if (selectedHomeDelivery === "19 Street, 115 Street x 58 Street, 92 Street") {
+          homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+          ? `\n${Math.round(((weight - 3) * 1000) + 4000)} MMK`
+          : `\n4000 MMK`;
+        }
+        else if (selectedHomeDelivery === "Others") {
+          homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
+          ? `\n${Math.round(((weight - 3) * 1000) + 5000)} MMK`
+          : `\n5000 MMK`;
+        }
       }
     }
 
