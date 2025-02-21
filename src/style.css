@@ -65,5 +65,7 @@ button.calculate-button {
 }
 
 .estimate-cost {
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }

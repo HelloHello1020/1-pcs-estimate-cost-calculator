@@ -19,7 +19,12 @@ function App() {
   const homeDeliveryLocations = {
     Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others", "No Door2Door"],
     Mandalay: ["19 Street, 115 Street x 58 Street, 48 Street", "19 Street, 115 Street x 58 Street, 92 Street", "Others", "No Door2Door"],
+    Maesot : ["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod", "Others"]
   };
+
+  const transportationCost = useRef();
+  const door2doorCost = useRef();
+  const pageLink = useRef()
 
   let homeDeliveryCost = ``;
   let estimatedCost = ``;
@@ -28,45 +33,51 @@ function App() {
     setHomeDeliveryOptions(homeDeliveryLocations[selectedOption2] || []);
   }, [selectedOption2]);
 
-  const estimateCost = useRef()
-  const pageLink = useRef()
-
   const handleCalculate = () => {
     estimatedCost = "";
     homeDeliveryCost = ""; // Reset cost
 
     if (selectedOption2 === "Yangon") {
       if (["Dala", "Thanlyin", "Hmawbi"].includes(selectedHomeDelivery)) {
-        homeDeliveryCost = `\n(Negotiate for the Door2Door cost)`;
+        homeDeliveryCost = `(Negotiate for the Door2Door cost)`;
       } else if (selectedHomeDelivery === "Others") {
         if (weight <= 3) {
-          homeDeliveryCost = `\n2500 MMK`;
+          homeDeliveryCost = `2500 MMK`;
         } else {
-          homeDeliveryCost = `\n${Math.round(((weight - 3) * 350) + 2500)} MMK`;
+          homeDeliveryCost = `${Math.round(((weight - 3) * 350) + 2500)} MMK`;
         }
       }
     }
   
     else if (selectedOption2 === "Mandalay") {
       if (weight > 10 || (length > 24 && width > 24 && height > 24)) {
-        homeDeliveryCost = `\n(Negotiate for the Door2Door cost)`;
+        homeDeliveryCost = `(Negotiate for the Door2Door cost)`;
       }
       else {
         if (selectedHomeDelivery === "19 Street, 115 Street x 58 Street, 48 Street") {
           homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-            ? `\n${Math.round(((weight - 3) * 1000) + 3000)} MMK`
-            : `\n3000 MMK`;
+            ? `${Math.round(((weight - 3) * 1000) + 3000)} MMK`
+            : `3000 MMK`;
         }
         else if (selectedHomeDelivery === "19 Street, 115 Street x 58 Street, 92 Street") {
           homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(((weight - 3) * 1000) + 4000)} MMK`
-          : `\n4000 MMK`;
+          ? `${Math.round(((weight - 3) * 1000) + 4000)} MMK`
+          : `4000 MMK`;
         }
         else if (selectedHomeDelivery === "Others") {
           homeDeliveryCost = length > 12 && width > 12 && height > 12 && weight > 3
-          ? `\n${Math.round(((weight - 3) * 1000) + 5000)} MMK`
-          : `\n5000 MMK`;
+          ? `${Math.round(((weight - 3) * 1000) + 5000)} MMK`
+          : `5000 MMK`;
         }
+      }
+    }
+
+    else if (selectedOption2 === "Maesot") {
+      if (selectedHomeDelivery === ("Hua Fai" || "Naung Bwar" || "Mae Pa Nuea" || "Mae Pa (Moo 1)" || "Tambon" || "Tambon Tha Sai Lod")) {
+        homeDeliveryCost = `฿40`
+      }
+      else {
+        homeDeliveryCost = `฿60`
       }
     }
 
@@ -464,7 +475,8 @@ function App() {
       }
     }
 
-    estimateCost.current.innerText = `${estimatedCost}${homeDeliveryCost}`
+    transportationCost.current.innerText = `Transportation Cost:\n${estimatedCost}`
+    door2doorCost.current.innerText = `Door2Door Cost:\n${homeDeliveryCost}`
   };
 
   return (
@@ -589,7 +601,10 @@ function App() {
         </button>
       </div>
 
-      <h2 className="estimate-cost" ref={estimateCost}></h2>
+      <div className="estimate-cost">
+        <h2 className="transportation-cost" ref={transportationCost}></h2>
+        <h2 className="door2door-cost" ref={door2doorCost}></h2>
+      </div>
       <a className="page-link" ref={pageLink} href="https://www.facebook.com/share/1Dsn9K7jrQ/?mibextid=wwXIfr" target="_blank">Hello Logistics Thailand Page</a>
     </div>
   );
