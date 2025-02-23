@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 function App() {
   const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]
-  const locationOptions = ['Maesot', 'Yangon', 'Mandalay', 'Chiang Mai', 'Myawaddy', 'Bangkok'];
+  const locationOptions = ['Maesot', 'Yangon', 'Mandalay', 'Chiang Mai', 'Myawaddy', 'Bangkok', "Samut Sakhon", "Nakhon Phanom", "Phetchaburi", "Ranong", "Nakhon Sawan", "Ratchaburi", "Samut Prakan", "Pathum Thani", "Kantang Trang", "Phuket", "Prachin Buri", "Nonthaburi"];
 
   const [selectedItemOption1, setSelectedItemOption] = useState("");
   const [deviceLength, setDeviceLength] = useState("");
@@ -19,15 +19,18 @@ function App() {
   const homeDeliveryLocations = {
     Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others", "No Door2Door"],
     Mandalay: ["19 Street, 115 Street x 58 Street, 48 Street", "19 Street, 115 Street x 58 Street, 92 Street", "Others", "No Door2Door"],
-    Maesot : ["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod", "Others"]
+    Maesot : ["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod", "Others", "No Door2Door"]
   };
 
   const transportationCost = useRef();
   const door2doorCost = useRef();
-  const pageLink = useRef()
 
   let homeDeliveryCost = ``;
   let estimatedCost = ``;
+
+  const openHelloFacebookLink = () => {
+    window.open("https://www.facebook.com/share/1Dsn9K7jrQ/?mibextid=wwXIfrq", "_blank");
+  };
 
   useEffect(() => {
     setHomeDeliveryOptions(homeDeliveryLocations[selectedOption2] || []);
@@ -73,11 +76,13 @@ function App() {
     }
 
     else if (selectedOption2 === "Maesot") {
-      if (selectedHomeDelivery === ("Hua Fai" || "Naung Bwar" || "Mae Pa Nuea" || "Mae Pa (Moo 1)" || "Tambon" || "Tambon Tha Sai Lod")) {
-        homeDeliveryCost = `฿40`
-      }
-      else {
-        homeDeliveryCost = `฿60`
+      if (weight < 100) {
+        if (["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod"].includes(selectedHomeDelivery)) {
+          homeDeliveryCost = `฿40`
+        }
+        else if (selectedHomeDelivery === "Others") {
+          homeDeliveryCost = `฿60`
+        }
       }
     }
 
@@ -184,7 +189,7 @@ function App() {
           }
         }
 
-        else if (weight >= 5.1 && weight <= 20) {
+        else if (weight >= 5.1 && weight <= 100) {
           if (length > 24 || width > 24 || height > 24) {
             estimatedCost = `฿${Math.round(weight * 35 + 20)}\n(฿20 for extra box size)`
           }
@@ -208,7 +213,7 @@ function App() {
           }
         }
 
-        else if (weight >= 5.1 && weight <= 20) {
+        else if (weight >= 5.1 && weight <= 100) {
           if (length > 24 || width > 24 || height > 24) {
             estimatedCost = `${Math.round(weight * 2500 + 2000)} MMK\n(2000 for extra box size)`
           }
@@ -331,6 +336,106 @@ function App() {
 
         else {
           estimatedCost = `฿${Math.round(weight * 55)}\n(Only using weight)\nClick the link below to negotiate about the full price`
+        }
+      }
+
+      else if ([
+        "Samut Sakhon", "Nakhon Phanom", "Phetchaburi", "Ranong",
+        "Nakhon Sawan", "Ratchaburi", "Samut Prakan", "Pathum Thani",
+        "Kantang Trang", "Phuket", "Nonthaburi"
+      ].includes(selectedOption2)) {
+        if (selectedOption1 === "Maesot") {
+          if (weight <= 2) {
+            if (length > 12 || width > 12 || height > 12) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 6 || width > 6 || height > 6) {
+              estimatedCost = `฿130\n(฿50 for extra box size)`
+            }
+            else if (length <= 6 || width <= 6 || height <= 6) {
+              estimatedCost = `฿80`
+            }
+          }
+          if (weight >= 2.1 && weight <= 3) {
+            if ((length > 12 || width > 12 || height > 12)) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 8 || width > 8 || height > 8) {
+              estimatedCost = `฿150\n(฿50 for extra box size)`
+            }
+            else if (length <= 8 || width <= 8 || height <= 8) {
+              estimatedCost = `฿100`
+            }
+          }
+          if (weight >= 3.1 && weight <= 4) {
+            if (length > 18 || width > 18 || height > 18) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 12 || width > 12 || height > 12) {
+              estimatedCost = `฿200\n(฿70 for extra box size)`
+            }
+            else if (length <= 12 || width <= 12 || height <= 12){
+              estimatedCost = `฿130`
+            }
+          }
+          if (weight >= 4.1 && weight <= 10) {
+            if (length > 24 || width > 24 || height > 24) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length <= 24 || width <= 24 || height <= 24) {
+              estimatedCost = `฿${weight * 50}`
+            }
+          }
+          if (weight > 10) {
+            estimatedCost = `฿${weight * 45}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          }
+        }
+
+        if (selectedOption1 === "Mandalay" || selectedOption1 === "Yangon") {
+          if (weight <= 2) {
+            if (length > 12 || width > 12 || height > 12) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 6 || width > 6 || height > 6) {
+              estimatedCost = `฿230\n${selectedOption1} - Maesot: ฿150 | Maesot - ${selectedOption2}: ฿80\n(฿50 for extra box size)`
+            }
+            else if (length <= 6 || width <= 6 || height <= 6) {
+              estimatedCost = `฿180\n${selectedOption1} - Maesot: ฿100 | Maesot - ${selectedOption2}: ฿80`
+            }
+          }
+          if (weight >= 2.1 && weight <= 3) {
+            if ((length > 12 || width > 12 || height > 12)) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 8 || width > 8 || height > 8) {
+              estimatedCost = `฿300\n${selectedOption1} - Maesot: ฿200 | Maesot - ${selectedOption2}: ฿100\n(฿50 for extra box size)`
+            }
+            else if (length <= 8 || width <= 8 || height <= 8) {
+              estimatedCost = `฿250\n${selectedOption1} - Maesot: ฿150 | Maesot - ${selectedOption2}: ฿100`
+            }
+          }
+          if (weight >= 3.1 && weight <= 4) {
+            if (length > 18 || width > 18 || height > 18) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length > 12 || width > 12 || height > 12) {
+              estimatedCost = `฿420\n${selectedOption1} - Maesot: ฿250 | Maesot - ${selectedOption2}: ฿150\n(฿70 for extra box size)`
+            }
+            else if (length <= 12 || width <= 12 || height <= 12){
+              estimatedCost = `฿350\n${selectedOption1} - Maesot: ฿200 | Maesot - ${selectedOption2}: ฿150`
+            }
+          }
+          if (weight >= 4.1 && weight <= 10) {
+            if (length > 24 || width > 24 || height > 24) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length <= 24 || width <= 24 || height <= 24) {
+              estimatedCost = `฿${weight * 100}\n${selectedOption1} - Maesot: ฿${weight * 50} | Maesot - ${selectedOption2}: ฿${weight * 50}`
+            }
+          }
+          if (weight > 10) {
+            estimatedCost = `฿${weight * 95}\n${selectedOption1} - Maesot: ฿${weight * 45} | Maesot - ${selectedOption2}: ฿${weight * 50}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          }
         }
       }
     }
@@ -475,8 +580,8 @@ function App() {
       }
     }
 
-    transportationCost.current.innerText = `Transportation Cost:\n${estimatedCost}`
-    door2doorCost.current.innerText = `Door2Door Cost:\n${homeDeliveryCost}`
+    transportationCost.current.innerText = `Transportation Cost: ${estimatedCost}`
+    door2doorCost.current.innerText = `Door2Door Cost: ${homeDeliveryCost}`
   };
 
   return (
@@ -605,7 +710,14 @@ function App() {
         <h2 className="transportation-cost" ref={transportationCost}></h2>
         <h2 className="door2door-cost" ref={door2doorCost}></h2>
       </div>
-      <a className="page-link" ref={pageLink} href="https://www.facebook.com/share/1Dsn9K7jrQ/?mibextid=wwXIfr" target="_blank">Hello Logistics Thailand Page</a>
+      <button
+        className="hello-facebook-link-button"
+        onClick={openHelloFacebookLink}
+      > 
+        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 512 512" height="33"><g fill-rule="evenodd" clip-rule="evenodd"><path fill="#3a5ba2" d="m256.23 512c140.58 0 255.77-115.19 255.77-255.77 0-141.046-115.19-256.23-255.77-256.23-141.046 0-256.23 115.184-256.23 256.23 0 140.58 115.184 255.77 256.23 255.77z"></path><path fill="#fff" d="m224.023 160.085c0-35.372 28.575-63.946 63.938-63.946h48.072v63.946h-32.199c-8.608 0-15.873 7.257-15.873 15.873v32.192h48.072v63.938h-48.072v144.22h-63.938v-144.22h-48.065v-63.938h48.065z"></path></g></svg></span>
+        <span class="text1">Hello Logistics Thailand</span>
+        <span class="text2">2.4K Followers</span> 
+      </button>    
     </div>
   );
 }
