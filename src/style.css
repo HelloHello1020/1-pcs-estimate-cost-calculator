@@ -76,6 +76,11 @@ button.calculate-button {
   text-align: center;
 }
 
+.transportation-cost, .door2door-cost {
+  display: flex;
+  flex-direction: column;
+}
+
 .hello-facebook-link-button {
   position: relative;
   width: 250px;
@@ -95,7 +100,7 @@ button.calculate-button {
 .text2 {
   position: absolute;
   top: 25%;
-  left: -100px;
+  left: -140px;
   font-weight: 700;
   font-size: 14px;
   color: white;
@@ -134,7 +139,7 @@ button.calculate-button {
 }
 
 .hello-facebook-link-button:hover .text2 {
-  transform: translateX(170px);
+  transform: translateX(190px);
   transition: transform 0.8s;
 }
 

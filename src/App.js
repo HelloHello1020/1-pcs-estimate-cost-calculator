@@ -1,5 +1,6 @@
 import "./style.css"
 import React, { useRef, useState, useEffect } from 'react';
+import { Button, Card, InputNumber } from 'antd';
 
 function App() {
   const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]
@@ -25,8 +26,8 @@ function App() {
   const transportationCost = useRef();
   const door2doorCost = useRef();
 
-  let homeDeliveryCost = ``;
-  let estimatedCost = ``;
+  let homeDeliveryCost = `Price`;
+  let estimatedCost = `Price`;
 
   const openHelloFacebookLink = () => {
     window.open("https://www.facebook.com/share/1Dsn9K7jrQ/?mibextid=wwXIfrq", "_blank");
@@ -83,6 +84,10 @@ function App() {
         else if (selectedHomeDelivery === "Others") {
           homeDeliveryCost = `฿60`
         }
+      }
+
+      else {
+        homeDeliveryCost = `Door2Door Unavailable`
       }
     }
 
@@ -580,8 +585,8 @@ function App() {
       }
     }
 
-    transportationCost.current.innerText = `Transportation Cost: ${estimatedCost}`
-    door2doorCost.current.innerText = `Door2Door Cost: ${homeDeliveryCost}`
+    transportationCost.current.innerText = `${estimatedCost}`;
+    door2doorCost.current.innerText = `${homeDeliveryCost}`;
   };
 
   return (
@@ -600,18 +605,18 @@ function App() {
               {option}
             </option>
           ))}
-        </select>
+      </select>
       </div>
 
       {(selectedItemOption1 === "Monitor" || selectedItemOption1 === "TV") && 
         <div className="device-length-input">
-        <input
+        <InputNumber
           className="device-length-input-box"
           type="number"
           value={deviceLength}
-          onChange={(e) => setDeviceLength(e.target.value)}
+          onChange={setDeviceLength}
           placeholder="Device Length (inches)"
-          min="0"
+          min={0}
         />
       </div>
       }
@@ -665,59 +670,79 @@ function App() {
 
       {/* Weight input with kg */}
       <div className="weight-input">
-        <input
+        <InputNumber
           type="number"
           value={weight}
-          onChange={(e) => setWeight(e.target.value)}
+          onChange={setWeight}
           placeholder="Weight (kg)"
-          min="0"
+          min={0}
+          style={{width: "120px"}}
         />
       </div>
 
       {/* Length, Width, and Height inputs */}
       <div className="size-input">
-        <input
+        <InputNumber
           type="number"
           value={length}
-          onChange={(e) => setLength(e.target.value)}
+          onChange={setLength}
           placeholder="Length (inches)"
-          min="0"
+          min={0}
+          style={{width: "150px"}}
         />
-        <input
+        <InputNumber
           type="number"
           value={width}
-          onChange={(e) => setWidth(e.target.value)}
+          onChange={setWidth}
           placeholder="Width (inches)"
-          min="0"
+          min={0}
+          style={{width: "150px"}}
         />
-        <input
+        <InputNumber
           type="number"
           value={height}
-          onChange={(e) => setHeight(e.target.value)}
+          onChange={setHeight}
           placeholder="Height (inches)"
-          min="0"
+          min={0}
+          style={{width: "150px"}}
         />
       </div>
 
       {/* Calculate button */}
       <div>
-        <button className="calculate-button" onClick={handleCalculate}>
+        <Button className="calculate-button" type="primary" onClick={handleCalculate}>
           Calculate
-        </button>
+        </Button>
       </div>
 
       <div className="estimate-cost">
-        <h2 className="transportation-cost" ref={transportationCost}></h2>
-        <h2 className="door2door-cost" ref={door2doorCost}></h2>
+        <Card
+          className="transportation-cost"
+          size="small"
+          title="Estimated Transportation Cost"
+          style={{ backgroundColor: "#7c73a4", border: "2px solid white"}}
+        >
+          <h4 ref={transportationCost}>{estimatedCost}</h4>
+        </Card>
+
+        <Card
+          className="door2door-cost"
+          size="small"
+          title="Estimated Door2Door Cost"
+          style={{ backgroundColor: "#7c73a4", border: "2px solid white"}}
+        >
+          <h4 ref={door2doorCost}>{homeDeliveryCost}</h4>
+        </Card>
       </div>
+
       <button
         className="hello-facebook-link-button"
         onClick={openHelloFacebookLink}
       > 
         <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="33" viewBox="0 0 512 512" height="33"><g fill-rule="evenodd" clip-rule="evenodd"><path fill="#3a5ba2" d="m256.23 512c140.58 0 255.77-115.19 255.77-255.77 0-141.046-115.19-256.23-255.77-256.23-141.046 0-256.23 115.184-256.23 256.23 0 140.58 115.184 255.77 256.23 255.77z"></path><path fill="#fff" d="m224.023 160.085c0-35.372 28.575-63.946 63.938-63.946h48.072v63.946h-32.199c-8.608 0-15.873 7.257-15.873 15.873v32.192h48.072v63.938h-48.072v144.22h-63.938v-144.22h-48.065v-63.938h48.065z"></path></g></svg></span>
         <span class="text1">Hello Logistics Thailand</span>
-        <span class="text2">2.4K Followers</span> 
-      </button>    
+        <span class="text2">Click to contact us!!</span> 
+      </button>
     </div>
   );
 }
