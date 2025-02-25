@@ -1,6 +1,7 @@
 import "./style.css"
 import React, { useRef, useState, useEffect } from 'react';
 import { Button, Card, InputNumber } from 'antd';
+import { CalculatorOutlined } from '@ant-design/icons';
 
 function App() {
   const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]
@@ -710,7 +711,7 @@ function App() {
 
       {/* Calculate button */}
       <div>
-        <Button className="calculate-button" type="primary" onClick={handleCalculate}>
+        <Button className="calculate-button" type="primary" icon={<CalculatorOutlined />} onClick={handleCalculate}>
           Calculate
         </Button>
       </div>
