@@ -6,6 +6,17 @@
   padding: 10px;
   gap: 15px;
   width: 100%;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .overlay {
@@ -20,7 +31,6 @@
   z-index: -1;
 }
 
-
 select,
 input {
   padding: 8px;
@@ -29,6 +39,12 @@ input {
   border-radius: 4px;
   margin-bottom: 10px;
   width: 150px;
+  transition: all 0.3s ease;
+}
+
+select:hover, input:hover {
+  transform: scale(1.05);
+  border-color: #7c73a4; /* Slight color change on hover */
 }
 
 div {
@@ -57,6 +73,12 @@ button.calculate-button {
   margin-top: 20px;
   background-color: gold;
   color: black;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button.calculate-button:hover {
+  transform: scale(1.1);
+  background-color: #4c447b; /* Slight darker background */
 }
 
 @media (max-width: 550px) {
@@ -83,6 +105,7 @@ button.calculate-button {
   flex-direction: column;
 }
 
+/* Pop-up animation for Hello Facebook button */
 .hello-facebook-link-button {
   position: relative;
   width: 250px;
@@ -91,6 +114,7 @@ button.calculate-button {
   background-color: white;
   border: 1px #3a5ba2 solid;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .text1 {
@@ -106,6 +130,7 @@ button.calculate-button {
   font-weight: 700;
   font-size: 14px;
   color: white;
+  transition: transform 0.8s ease;
 }
 
 .icon {
@@ -127,28 +152,60 @@ button.calculate-button {
   background-color: #3a5ba2;
 }
 
-.hello-facebook-link-button:hover .icon {
-  transform: translateX(210px);
-  transition: transform 0.7s;
-}
-
+/* Pop-up appearance with bounce effect */
 .hello-facebook-link-button:hover .text1 {
   visibility: hidden;
 }
 
-.hello-facebook-link-button:hover {
-  background-color: #3a5ba2;
-}
-
 .hello-facebook-link-button:hover .text2 {
   transform: translateX(190px);
-  transition: transform 0.8s;
+}
+
+.hello-facebook-link-button:hover .icon {
+  transform: translateX(210px);
+}
+
+.hello-facebook-link-button:hover {
+  background-color: #3a5ba2;
+  transform: scale(1.05);
 }
 
 .hello-facebook-link-button:active {
   transform: scale(1.03);
 }
 
+/* Pop-up show effect */
+.pop-up-message {
+  display: none;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #7c73a4;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  animation: popUp 0.6s ease-out forwards;
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hello-facebook-link-button:hover + .pop-up-message {
+  display: block;
+}
+
+/* Bottom fixed images */
 .bottom-left-image {
   position: fixed;
   bottom: 0px;  /* Adjust as needed */
