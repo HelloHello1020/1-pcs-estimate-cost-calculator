@@ -721,7 +721,7 @@ function App() {
           className="transportation-cost"
           size="small"
           title="Estimated Transportation Cost"
-          style={{ backgroundColor: "#7c73a4", border: "2px solid white"}}
+          style={{ backgroundColor: "gold", border: "2px solid black"}}
         >
           <h4 ref={transportationCost}>{estimatedCost}</h4>
         </Card>
@@ -730,7 +730,7 @@ function App() {
           className="door2door-cost"
           size="small"
           title="Estimated Door2Door Cost"
-          style={{ backgroundColor: "#7c73a4", border: "2px solid white"}}
+          style={{ backgroundColor: "gold", border: "2px solid black"}}
         >
           <h4 ref={door2doorCost}>{homeDeliveryCost}</h4>
         </Card>
@@ -744,6 +744,19 @@ function App() {
         <span class="text1">Hello Logistics Thailand</span>
         <span class="text2">Click to contact us!!</span> 
       </button>
+
+      <img
+        src="/thingyan-3-people.png" // Make sure this is the correct path
+        alt="decorative"
+        className="bottom-left-image decoration"
+      />
+
+      <img
+        src="/thingyan-1-people.png" // Make sure this is the correct path
+        alt="decorative"
+        className="bottom-right-image decoration"
+      />
+      
     </div>
   );
 }

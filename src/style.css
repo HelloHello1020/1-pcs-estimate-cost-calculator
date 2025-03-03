@@ -55,6 +55,8 @@ button.calculate-button {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
+  background-color: gold;
+  color: black;
 }
 
 @media (max-width: 550px) {
@@ -145,4 +147,80 @@ button.calculate-button {
 
 .hello-facebook-link-button:active {
   transform: scale(1.03);
+}
+
+.bottom-left-image {
+  position: fixed;
+  bottom: 0px;  /* Adjust as needed */
+  left: 20px;    /* Adjust as needed */
+  width: 400px;  /* Adjust the size as needed */
+  height: auto;
+  opacity: 0.9;  /* Adjust transparency if needed */
+  pointer-events: none;  /* Prevents the image from interfering with user clicks */
+}
+
+.bottom-right-image {
+  position: fixed;
+  bottom: 20px;  /* Adjust as needed */
+  right: 0px;    /* Adjust as needed */
+  width: 300px;  /* Adjust the size as needed */
+  height: auto;
+  opacity: 0.9;  /* Adjust transparency if needed */
+  pointer-events: none;  /* Prevents the image from interfering with user clicks */
+}
+
+@media (max-width: 1000px) {
+  .bottom-left-image {
+      width: 300px;
+  }
+  .bottom-right-image {
+      width: 250px;
+  }
+}
+
+@media (max-width: 850px) {
+  .bottom-left-image, .bottom-right-image {
+      width: 200px;
+  }
+}
+
+@media (max-width: 650px) {
+  .bottom-left-image, .bottom-right-image {
+      bottom: 150px;
+      width: 175px;
+  }
+}
+
+@media (max-width: 500px) {
+  .bottom-left-image, .bottom-right-image {
+      bottom: 300px;
+      width: 150px;
+  }
+}
+
+@media (max-width: 450px) {
+  .bottom-left-image, .bottom-right-image {
+    width: 120px;
+  }
+}
+
+@media (max-width: 380px) {
+  .bottom-left-image, .bottom-right-image {
+      width: 100px;
+  }
+}
+
+@media (max-width: 350px) {
+  .bottom-left-image, .bottom-right-image {
+    bottom: 400px;
+  }
+  .bottom-left-image {
+    width: 80px;
+  }
+}
+
+@media (max-width: 300px) {
+  .bottom-left-image, .bottom-right-image {
+    opacity: 0.7;
+  }
 }
