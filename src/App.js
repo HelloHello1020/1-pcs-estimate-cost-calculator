@@ -672,6 +672,7 @@ function App() {
       {/* Weight input with kg */}
       <div className="weight-input">
         <InputNumber
+          className="weight-input-box"
           type="number"
           value={weight}
           onChange={setWeight}
@@ -684,6 +685,7 @@ function App() {
       {/* Length, Width, and Height inputs */}
       <div className="size-input">
         <InputNumber
+          className="length-input-box"
           type="number"
           value={length}
           onChange={setLength}
@@ -692,6 +694,7 @@ function App() {
           style={{width: "150px"}}
         />
         <InputNumber
+          className="width-input-box"
           type="number"
           value={width}
           onChange={setWidth}
@@ -700,6 +703,7 @@ function App() {
           style={{width: "150px"}}
         />
         <InputNumber
+          className="height-input-box"
           type="number"
           value={height}
           onChange={setHeight}

@@ -57,6 +57,11 @@ div {
 .item-type-dropdown {
   width: 150px;
   font-size: 15px;
+  background-color: #7c73a4;
+}
+
+.weight-input-box, .length-input-box, .width-input-box, .height-input-box {
+  background-color: #7c73a4;
 }
 
 .device-length-input-box,
