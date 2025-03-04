@@ -630,7 +630,7 @@ const Home = () => {
         <div className="cities-with-door2door">
           <div className="location-dropdowns">
             <h2 className="destinations-title">Destinations</h2>
-          
+
             <div className="cities">
               <select
                 className="from-dropdown dropdown"
@@ -644,7 +644,7 @@ const Home = () => {
                   </option>
                 ))}
               </select>
-              
+
               <select
                 className="to-dropdown dropdown"
                 value={selectedOption2}
@@ -659,11 +659,11 @@ const Home = () => {
               </select>
             </div>
           </div>
-              
+
           {homeDeliveryOptions.length > 0 && (
             <div className="home-delivery">
               <h4 className="door2door-title">Door2Door</h4>
-          
+
               <select
                 className="home-delivery-dropdown dropdown"
                 value={selectedHomeDelivery}
@@ -676,7 +676,7 @@ const Home = () => {
                   </option>
                 ))}
               </select>
-              
+
             </div>
           )}
         </div>
@@ -738,14 +738,14 @@ const Home = () => {
         </div>
       </div>
 
-      <Divider orientation="vertical"></Divider>
+      <Divider type="vertical" />
 
       <div className="output-container">
         <div className="estimate-cost">
           <Card
             className="transportation-cost"
             title="Estimated Transportation Cost"
-            style={{ backgroundColor: "#e0e0e0", border: "2px solid white", width: "450px"}}
+            style={{ border: "2px solid white", width: "500px"}}
           >
             <h4 ref={transportationCost} className="transportation-cost-text"></h4>
           </Card>
@@ -753,7 +753,7 @@ const Home = () => {
           <Card
             className="door2door-cost"
             title="Estimated Door2Door Cost"
-            style={{ backgroundColor: "#e0e0e0", border: "2px solid white", width: "450px"}}
+            style={{ border: "2px solid white", width: "500px"}}
           >
             <h4 ref={door2doorCost} className="door2door-cost-text"></h4>
           </Card>

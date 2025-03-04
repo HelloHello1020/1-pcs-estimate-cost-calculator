@@ -134,6 +134,10 @@ div {
   gap: 3px;
 }
 
+.size-input-box {
+  gap: 14px;
+}
+
 .from-dropdown,
 .to-dropdown,
 .item-type-dropdown {
@@ -194,14 +198,14 @@ button.calculate-button:hover {
 
 .transportation-cost, .door2door-cost {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
+  justify-content: center;
+  align-items: flex-start;
   height: 240px;
 }
 
 .transportation-cost-text, .door2door-cost-text {
-  font-size: 25px;
+  margin-top: 0;
+  font-size: 18px;
 }
 
 .hello-facebook-link-button {
