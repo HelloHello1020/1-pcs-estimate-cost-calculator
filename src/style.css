@@ -3,11 +3,107 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px;
-  gap: 15px;
-  width: 100%;
+  width: 100%; /* Ensures full width */
+  height: 100vh; /* Keeps full viewport height */
   opacity: 0;
-  animation: fadeIn 1s forwards;
+  animation: fadeIn 2s forwards;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%; /* Ensure it spans full width */
+  border-bottom: 1px solid black;
+}
+
+.company-logo {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  width: 180px;
+  height: auto;
+}
+
+.title {
+  margin-left: 27.5%;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-container {
+  position: fixed; 
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  gap: 0;
+  margin: 90px;
+  margin-top: 0;
+  left: 40px;
+  height: 100vh;
+}
+
+.item-with-length {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.cities-with-door2door {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.item-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.device-length-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 14px;
+}
+
+.home-delivery {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 0;
+}
+
+.weight-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.size-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.output-container {
+  position: fixed; 
+  display: flex;
+  flex-direction: column;
+  margin: 80px;
+  margin-top: 30px;
+  margin-right: 50px;
+  right: 20px;
+  height: 100vh;
+}
+
+.location-dropdowns {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 @keyframes fadeIn {
@@ -19,27 +115,14 @@
   }
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(/hello-logistics_thailand_logo.jpg) center center/cover;
-  background-size: 50%;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-select,
-input {
+select {
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 25px;
   margin-bottom: 10px;
-  width: 150px;
   transition: all 0.3s ease;
+  background-color: rgba(255, 215, 0, 1);
 }
 
 select:hover, input:hover {
@@ -52,33 +135,47 @@ div {
   gap: 3px;
 }
 
+.size-input-box {
+  gap: 14px;
+}
+
 .from-dropdown,
 .to-dropdown,
 .item-type-dropdown {
-  width: 150px;
-  font-size: 15px;
+  width: 200px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.weight-input-box, .length-input-box, .width-input-box, .height-input-box {
+  width: 165px;
+  font-size: 20px;
+  background-color: rgba(255, 215, 0, 1);
 }
 
 .device-length-input-box,
 .home-delivery-dropdown {
-  width: 200px;
+  width: 185px;
+}
+
+.device-length-input-box {
+  width: 140px;
 }
 
 button.calculate-button {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 22px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
-  background-color: gold;
-  color: black;
+  margin-top: 20%;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  width: 150px;
+  height: 50px;
 }
 
 button.calculate-button:hover {
   transform: scale(1.1);
-  background-color: #4c447b; /* Slight darker background */
 }
 
 @media (max-width: 550px) {
@@ -98,23 +195,33 @@ button.calculate-button:hover {
   display: flex;
   flex-direction: column;
   text-align: center;
+  gap: 50px;
 }
 
 .transportation-cost, .door2door-cost {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 240px;
+  background-color: rgba(255, 215, 0, 1);
 }
 
-/* Pop-up animation for Hello Facebook button */
+.transportation-cost-text, .door2door-cost-text {
+  margin-top: 0;
+  font-size: 18px;
+}
+
 .hello-facebook-link-button {
   position: relative;
+  margin-top: 85%;
+  left: 55%;
+  right: auto;
   width: 250px;
   height: 33px;
   border-radius: 30px;
   background-color: white;
   border: 1px #3a5ba2 solid;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .text1 {
@@ -130,7 +237,6 @@ button.calculate-button:hover {
   font-weight: 700;
   font-size: 14px;
   color: white;
-  transition: transform 0.8s ease;
 }
 
 .icon {
@@ -152,132 +258,24 @@ button.calculate-button:hover {
   background-color: #3a5ba2;
 }
 
-/* Pop-up appearance with bounce effect */
+.hello-facebook-link-button:hover .icon {
+  transform: translateX(210px);
+  transition: transform 0.7s;
+}
+
 .hello-facebook-link-button:hover .text1 {
   visibility: hidden;
 }
 
-.hello-facebook-link-button:hover .text2 {
-  transform: translateX(190px);
-}
-
-.hello-facebook-link-button:hover .icon {
-  transform: translateX(210px);
-}
-
 .hello-facebook-link-button:hover {
   background-color: #3a5ba2;
-  transform: scale(1.05);
+}
+
+.hello-facebook-link-button:hover .text2 {
+  transform: translateX(190px);
+  transition: transform 0.8s;
 }
 
 .hello-facebook-link-button:active {
   transform: scale(1.03);
-}
-
-/* Pop-up show effect */
-.pop-up-message {
-  display: none;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background-color: #7c73a4;
-  border-radius: 5px;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  animation: popUp 0.6s ease-out forwards;
-}
-
-@keyframes popUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hello-facebook-link-button:hover + .pop-up-message {
-  display: block;
-}
-
-/* Bottom fixed images */
-.bottom-left-image {
-  position: fixed;
-  bottom: 0px;  /* Adjust as needed */
-  left: 20px;    /* Adjust as needed */
-  width: 400px;  /* Adjust the size as needed */
-  height: auto;
-  opacity: 0.9;  /* Adjust transparency if needed */
-  pointer-events: none;  /* Prevents the image from interfering with user clicks */
-}
-
-.bottom-right-image {
-  position: fixed;
-  bottom: 20px;  /* Adjust as needed */
-  right: 0px;    /* Adjust as needed */
-  width: 300px;  /* Adjust the size as needed */
-  height: auto;
-  opacity: 0.9;  /* Adjust transparency if needed */
-  pointer-events: none;  /* Prevents the image from interfering with user clicks */
-}
-
-@media (max-width: 1000px) {
-  .bottom-left-image {
-      width: 300px;
-  }
-  .bottom-right-image {
-      width: 250px;
-  }
-}
-
-@media (max-width: 850px) {
-  .bottom-left-image, .bottom-right-image {
-      width: 200px;
-  }
-}
-
-@media (max-width: 650px) {
-  .bottom-left-image, .bottom-right-image {
-      bottom: 150px;
-      width: 175px;
-  }
-}
-
-@media (max-width: 500px) {
-  .bottom-left-image, .bottom-right-image {
-      bottom: 300px;
-      width: 150px;
-  }
-}
-
-@media (max-width: 450px) {
-  .bottom-left-image, .bottom-right-image {
-    width: 120px;
-  }
-}
-
-@media (max-width: 380px) {
-  .bottom-left-image, .bottom-right-image {
-      width: 100px;
-  }
-}
-
-@media (max-width: 350px) {
-  .bottom-left-image, .bottom-right-image {
-    bottom: 400px;
-  }
-  .bottom-left-image {
-    width: 80px;
-  }
-}
-
-@media (max-width: 300px) {
-  .bottom-left-image, .bottom-right-image {
-    opacity: 0.7;
-  }
 }
