@@ -176,19 +176,6 @@ button.calculate-button:hover {
   transform: scale(1.1);
 }
 
-@media (max-width: 550px) {
-  .size-input {
-    display: flex;
-    flex-direction: column;
-  }
-  .transportation-cost {
-    font-size: 18px;
-  }
-  .door2door-cost {
-    font-size: 18px;
-  }
-}
-
 .estimate-cost {
   display: flex;
   flex-direction: column;
@@ -198,8 +185,8 @@ button.calculate-button:hover {
 
 .transportation-cost, .door2door-cost {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   height: 240px;
 }
 
@@ -208,7 +195,38 @@ button.calculate-button:hover {
   font-size: 18px;
 }
 
-.hello-facebook-link-button {
+@media (max-width: 1300px) {
+  .input-container {
+    transform: scale(0.8);
+    left: 20px;
+  }
+  .output-container {
+    transform: scale(0.8);
+    margin-top: 0;
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .input-container {
+    left: 0;
+  }
+  .output-container {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1050px) {
+  .input-container {
+    transform: scale(0.7);
+  }
+  .output-container {
+    transform: scale(0.7);
+    margin-top: 0;
+  }
+}
+
+/*.hello-facebook-link-button {
   position: relative;
   margin-top: 85%;
   left: 55%;
@@ -275,4 +293,4 @@ button.calculate-button:hover {
 
 .hello-facebook-link-button:active {
   transform: scale(1.03);
-}
+}*/

@@ -5,8 +5,14 @@ import Home from "./home.js";
 const App = (props) => {
   return (
     <div className="app">
-      <Header {...props} />
-      <Home {...props} />
+      {window.innerWidth > 1000 ? (
+        <>
+          <Header {...props} />
+          <Home {...props} />
+        </>
+      ) : (
+        <smallerHome {...props} />
+      )}
     </div>
   );
 };
