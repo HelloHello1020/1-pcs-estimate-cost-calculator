@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./header.js";
 import Home from "./home.js";
+import SmallerHome from "./smallerHome.js";
 
 const App = (props) => {
   return (
@@ -11,7 +12,10 @@ const App = (props) => {
           <Home {...props} />
         </>
       ) : (
-        <smallerHome {...props} />
+        <>
+          <Header {...props} />
+          <SmallerHome {...props} />
+        </>
       )}
     </div>
   );
