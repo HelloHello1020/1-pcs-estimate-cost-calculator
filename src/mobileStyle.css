@@ -18,7 +18,7 @@ body {
   gap: 0;
   margin: 90px;
   margin-top: 0;
-  left: 40px;
+  left: 0;
   height: 100vh;
   position: absolute; 
   overflow-y: auto; /* Enables scrolling if needed */
@@ -26,14 +26,14 @@ body {
 
 .mobile-item-with-length {
   display: flex;
-  flex-direction: row;
-  gap: 30px;
+  flex-direction: column;
+  gap: 0px;
 }
 
 .mobile-cities-with-door2door {
   display: flex;
-  flex-direction: row;
-  gap: 15px;
+  flex-direction: column;
+  gap: 0;
 }
 
 .mobile-item-type {
@@ -116,7 +116,15 @@ div {
 }
 
 .mobile-size-input-box {
+  display: flex;
+  flex-direction: column;
   gap: 14px;
+  align-items: center;
+}
+
+.length-and-width {
+  display: flex;
+  flex-direction: row;
 }
 
 .mobile-from-dropdown,
@@ -147,7 +155,7 @@ button.mobile-calculate-button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20%;
+  margin-top: 30%;
   transition: transform 0.3s ease, background-color 0.3s ease;
   width: 150px;
   height: 50px;

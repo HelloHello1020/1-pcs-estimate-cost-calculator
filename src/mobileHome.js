@@ -700,26 +700,29 @@ const MobileHome = () => {
             {/* Length, Width, and Height inputs */}
             <div className="mobile-size-input">
               <h2 className="mobile-size-title">Size</h2>
-          
+
               <div className="mobile-size-input-box">
-                <InputNumber
-                  className="mobile-length-input-box"
-                  type="number"
-                  addonAfter="inches"
-                  value={length}
-                  onChange={setLength}
-                  placeholder="Length"
-                  min={0}
-                />
-                <InputNumber
-                  className="mobile-width-input-box"
-                  type="number"
-                  addonAfter="inches"
-                  value={width}
-                  onChange={setWidth}
-                  placeholder="Width"
-                  min={0}
-                />
+                <div className="length-and-width">
+                  <InputNumber
+                    className="mobile-length-input-box"
+                    type="number"
+                    addonAfter="inches"
+                    value={length}
+                    onChange={setLength}
+                    placeholder="Length"
+                    min={0}
+                  />
+                  <InputNumber
+                    className="mobile-width-input-box"
+                    type="number"
+                    addonAfter="inches"
+                    value={width}
+                    onChange={setWidth}
+                    placeholder="Width"
+                    min={0}
+                  />
+                </div>
+
                 <InputNumber
                   className="mobile-height-input-box"
                   type="number"
