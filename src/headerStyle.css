@@ -1,0 +1,39 @@
+
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%; /* Ensure it spans full width */
+    border-bottom: 1px solid black;
+}
+  
+.company-logo {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  width: 180px;
+  height: auto;
+}
+
+.title {
+  margin-left: 27.5%;
+}
+
+@media (max-width: 600px) {
+    .header {
+        border-bottom: none;
+    }
+    .company-logo {
+        width: 140px;
+        height: 70px;
+    }
+    .title {
+      font-size: 24px;
+      margin-left: 22%;
+    }
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 20px;
+    }
+}

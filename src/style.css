@@ -9,25 +9,6 @@
   animation: fadeIn 2s forwards;
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  width: 100%; /* Ensure it spans full width */
-  border-bottom: 1px solid black;
-}
-
-.company-logo {
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left: 1%;
-  width: 180px;
-  height: auto;
-}
-
-.title {
-  margin-left: 27.5%;
-}
-
 .home {
   display: flex;
   flex-direction: row;
