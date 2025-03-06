@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./header.js";
 import Home from "./home.js";
 import SmallerHome from "./smallerHome.js";
 import MobileHome from "./mobileHome.js";
 
 const App = (props) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+  }, []);
+
   return (
     <div className="app">
-      {window.innerWidth > 1000 ? (
+      {windowWidth > 1000 ? (
         <>
           <Header {...props} />
           <Home {...props} />
         </>
-      ) : window.innerWidth > 700 ? ( // Missing '?' was added here
+      ) : windowWidth > 700 ? (
         <>
           <Header {...props} />
           <SmallerHome {...props} />
@@ -26,4 +37,5 @@ const App = (props) => {
     </div>
   );
 };
+
 export default App;
