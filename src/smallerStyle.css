@@ -68,11 +68,13 @@ body {
   position: fixed; 
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 80px;
   margin-top: 30px;
   margin-right: 22%;
   right: 20px;
   height: 100vh;
+  gap: 0;
 }
 
 .smaller-location-dropdowns {
@@ -135,7 +137,7 @@ div {
   width: 140px;
 }
 
-button.smaller-calculate-button {
+button.smaller-calculate-button, button.smaller-recalculate-button {
   padding: 10px 20px;
   font-size: 22px;
   border: none;
@@ -147,7 +149,7 @@ button.smaller-calculate-button {
   height: 50px;
 }
 
-button.smaller-calculate-button:hover {
+button.smaller-calculate-button:hover, button.smaller-recalculate-button:hover {
   transform: scale(1.1);
 }
 

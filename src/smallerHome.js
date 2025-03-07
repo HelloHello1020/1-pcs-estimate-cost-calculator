@@ -741,8 +741,6 @@ const SmallerHome = () => {
             </div>
           </div>
           
-          <Divider type="vertical" />
-          
           <div className={`smaller-output-container ${showOutput ? "slide-in" : "hidden"}`}>
             <div className="smaller-estimate-cost">
               <Card
@@ -760,6 +758,12 @@ const SmallerHome = () => {
               >
                 <h4 ref={door2doorCost} className="smaller-door2door-cost-text"></h4>
               </Card>
+            </div>
+
+            <div className="smaller-recalculate-button">
+              <Button className="smaller-recalculate-button" type="primary" shape="round" onClick={() => setShowOutput(false)}>
+                Re-Calculate
+              </Button>
             </div>
           </div>
           

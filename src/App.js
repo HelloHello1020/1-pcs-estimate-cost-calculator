@@ -18,19 +18,18 @@ const App = (props) => {
 
   return (
     <div className="app">
+      <Header {...props} />
+
       {windowWidth > 1000 ? (
         <>
-          <Header {...props} />
           <Home {...props} />
         </>
       ) : windowWidth > 700 ? (
         <>
-          <Header {...props} />
           <SmallerHome {...props} />
         </>
       ) : (
         <>
-          <Header {...props} />
           <MobileHome {...props} />
         </>
       )}

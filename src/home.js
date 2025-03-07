@@ -738,8 +738,6 @@ const Home = () => {
         </div>
       </div>
 
-      <Divider type="vertical" />
-
       <div className="output-container">
         <div className="estimate-cost">
           <Card

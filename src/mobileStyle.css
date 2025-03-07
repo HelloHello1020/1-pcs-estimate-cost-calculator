@@ -73,13 +73,15 @@ body {
   position: fixed; 
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 80px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-right: 18%;
   right: 20px;
   height: 100vh;
   position: absolute; 
   overflow-y: auto; /* Enables scrolling if needed */
+  gap: 0;
 }
 
 .mobile-location-dropdowns {

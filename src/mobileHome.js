@@ -742,9 +742,7 @@ const MobileHome = () => {
               </Button>
             </div>
           </div>
-          
-          <Divider type="vertical" />
-          
+                    
           <div className={`mobile-output-container ${showOutput ? "slide-in" : "hidden"}`}>
             <div className="mobile-estimate-cost">
               <Card
@@ -762,6 +760,12 @@ const MobileHome = () => {
               >
                 <h4 ref={door2doorCost} className="mobile-door2door-cost-text"></h4>
               </Card>
+            </div>
+
+            <div className="smaller-recalculate-button">
+                <Button className="smaller-recalculate-button" type="primary" shape="round" onClick={() => setShowOutput(false)}>
+                  Re-Calculate
+                </Button>
             </div>
           </div>
         </div>
