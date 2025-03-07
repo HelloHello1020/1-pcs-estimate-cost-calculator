@@ -240,6 +240,9 @@ button.mobile-calculate-button:hover {
     .mobile-output-container {
         margin-right: 4%;
     }
+    .mobile-transportation-cost, .mobile-door2door-cost {
+      transform: scale(0.85);
+    }
 }
 
 @media (max-width: 470px) {
@@ -275,6 +278,9 @@ button.mobile-calculate-button:hover {
     .mobile-output-container {
         margin-right: -10%;
     }
+    .mobile-transportation-cost, .mobile-door2door-cost {
+      transform: scale(0.7);
+    }
 }
 
 @media (max-width: 390px) {
@@ -293,7 +299,7 @@ button.mobile-calculate-button:hover {
       transform: translateX(-130%);
     }
     .mobile-output-container {
-        margin-right: -22%;
+        margin-right: -14%;
     }
 }
 
@@ -301,27 +307,18 @@ button.mobile-calculate-button:hover {
     .mobile-input-container {
       margin-top: -125px;
     }
-    .mobile-output-container {
-        margin-right: -28%;
-    }
 }
 
 @media (max-width: 330px) {
-    .mobile-output-container {
-        margin-right: -34%;
-    }
+  .mobile-output-container {
+    margin-right: -22%;
+  }
 }
 
-@media (max-width: 320px) {
-    .mobile-output-container {
-        margin-right: -38%;
-    }
-}
-
-@media (max-width: 310px) {
-    .mobile-output-container {
-        margin-right: -42%;
-    }
+@media (max-width: 305px) {
+  .mobile-output-container {
+    margin-right: -25%;
+  }
 }
 
 /*
