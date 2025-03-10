@@ -598,7 +598,7 @@ const SmallerHome = () => {
           <div className={`smaller-input-container ${showOutput ? "slide-out" : ""}`}>
             <div className="smaller-item-with-length">
               <div className="smaller-item-type">
-                <h2 className="smaller-item-type-title">Item Type</h2>
+                <h2 className="smaller-item-type-title">Item</h2>
 
                 <select
                   className="smaller-item-type-dropdown smaller-dropdown"

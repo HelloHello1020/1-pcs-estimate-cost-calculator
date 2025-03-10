@@ -21,7 +21,7 @@
   align-items:flex-start;
   gap: 0;
   margin: 90px;
-  margin-top: 0;
+  margin-top: 0px;
   left: 40px;
   height: 100vh;
 }
@@ -34,7 +34,7 @@
 
 .cities-with-door2door {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 15px;
 }
 
@@ -51,7 +51,7 @@
   margin-top: 14px;
 }
 
-.home-delivery {
+.home-delivery, .pickup-location {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -133,12 +133,28 @@ div {
 }
 
 .device-length-input-box,
-.home-delivery-dropdown {
+.home-delivery-dropdown, .pickup-dropdown {
   width: 185px;
 }
 
 .device-length-input-box {
   width: 140px;
+}
+
+.home-delivery-options {
+  display: flex;
+}
+
+.checkbox-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.checkbox-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 button.calculate-button {
@@ -168,7 +184,14 @@ button.calculate-button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 240px;
+}
+
+.transportation-cost {
+  height: 210px;
+}
+
+.door2door-cost {
+  height: 300px;
 }
 
 .transportation-cost-text, .door2door-cost-text {

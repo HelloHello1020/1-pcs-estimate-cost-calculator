@@ -597,7 +597,7 @@ const MobileHome = () => {
           <div className={`mobile-input-container ${showOutput ? "slide-out" : ""}`}>
             <div className="mobile-item-with-length">
               <div className="mobile-item-type">
-                <h2 className="mobile-item-type-title">Item Type</h2>
+                <h2 className="mobile-item-type-title">Item</h2>
 
                 <select
                   className="mobile-item-type-dropdown mobile-dropdown"
