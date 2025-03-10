@@ -14,10 +14,11 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
+  left: -100px;
+  top: -15px;
   margin: 90px;
-  margin-top: 0;
-  left: 40px;
   height: 100vh;
+  transform: scale(0.9) translateX(0);
 }
 
 .smaller-item-with-length {
@@ -28,8 +29,7 @@ body {
 
 .smaller-cities-with-door2door {
   display: flex;
-  flex-direction: row;
-  gap: 15px;
+  flex-direction: column;
 }
 
 .smaller-item-type {
@@ -45,10 +45,9 @@ body {
   margin-top: 14px;
 }
 
-.smaller-home-delivery {
+.smaller-home-delivery, .smaller-pickup-location {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
   gap: 0;
 }
 
@@ -128,13 +127,35 @@ div {
   font-size: 20px;
 }
 
-.smaller-device-length-input-box,
-.smaller-home-delivery-dropdown {
+.smaller-device-length-input-box {  
   width: 185px;
+}
+
+.smaller-home-delivery-dropdown, .smaller-pickup-dropdown {
+  width: 200px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
 }
 
 .smaller-device-length-input-box {
   width: 140px;
+}
+
+.smaller-home-delivery-options {
+  display: flex;
+}
+
+.smaller-checkbox-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.smaller-checkbox-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 button.smaller-calculate-button, button.smaller-recalculate-button {
@@ -143,7 +164,7 @@ button.smaller-calculate-button, button.smaller-recalculate-button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20%;
+  margin-top: 16%;
   transition: transform 0.3s ease, background-color 0.3s ease;
   width: 150px;
   height: 50px;
@@ -194,11 +215,6 @@ button.smaller-calculate-button:hover, button.smaller-recalculate-button:hover {
 }
 
 @media (max-width: 780px) {
-    .smaller-input-container {
-      transform: scale(0.9) translateX(0);
-      left: 30px;
-    }
-
     .smaller-output-container {
         margin-right: 20%;
     }
@@ -209,9 +225,6 @@ button.smaller-calculate-button:hover, button.smaller-recalculate-button:hover {
 }
 
 @media (max-width: 700px) {
-    .smaller-input-container {
-        left: 0;
-    }
     .smaller-output-container {
         margin-right: 17%;
     }

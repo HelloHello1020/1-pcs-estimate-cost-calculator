@@ -17,6 +17,10 @@ const SmallerHome = () => {
     const [homeDeliveryOptions, setHomeDeliveryOptions] = useState([]);
     const [selectedHomeDelivery, setSelectedHomeDelivery] = useState("");
 
+    const [isDoor2DoorChecked, setIsDoor2DoorChecked] = useState(false);
+    const [isPickupChecked, setIsPickupChecked] = useState(false);
+    const [selectedPickup, setSelectedPickup] = useState("");
+
     const [showOutput, setShowOutput] = useState(false);
 
     const homeDeliveryLocations = {
@@ -29,6 +33,7 @@ const SmallerHome = () => {
     const door2doorCost = useRef();
 
     let homeDeliveryCost = `Price`;
+    let pickupCost = `Price`;
     let estimatedCost = `Price`;
 
     const openHelloFacebookLink = () => {
@@ -42,7 +47,56 @@ const SmallerHome = () => {
     const handleCalculate = () => {
       estimatedCost = "";
       homeDeliveryCost = ""; // Reset cost
-
+      pickupCost = "";
+      
+      if (selectedOption1 === "Yangon") {
+        if (["Dala", "Thanlyin", "Hmawbi"].includes(selectedPickup)) {
+          pickupCost = `(Negotiate for the Pickup cost)`;
+        } else if (selectedPickup === "Others") {
+          if (weight <= 3) {
+            pickupCost = `2500 MMK`;
+          } else {
+            pickupCost = `${Math.round(((weight - 3) * 350) + 2500)} MMK`;
+          }
+        }
+      }
+      
+      else if (selectedOption1 === "Mandalay") {
+        if (weight > 10 || (length > 24 && width > 24 && height > 24)) {
+          pickupCost = `(Negotiate for the Pickup cost)`;
+        }
+        else {
+          if (selectedPickup === "19 Street, 115 Street x 58 Street, 48 Street") {
+            pickupCost = length > 12 && width > 12 && height > 12 && weight > 3
+              ? `${Math.round(((weight - 3) * 1000) + 3000)} MMK`
+              : `3000 MMK`;
+          }
+          else if (selectedPickup === "19 Street, 115 Street x 58 Street, 92 Street") {
+            pickupCost = length > 12 && width > 12 && height > 12 && weight > 3
+              ? `${Math.round(((weight - 3) * 1000) + 4000)} MMK`
+              : `4000 MMK`;
+          }
+          else if (selectedPickup === "Others") {
+            pickupCost = length > 12 && width > 12 && height > 12 && weight > 3
+              ? `${Math.round(((weight - 3) * 1000) + 5000)} MMK`
+              : `5000 MMK`;
+          }
+        }
+      }
+      
+      else if (selectedOption1 === "Maesot") {
+        if (weight < 100) {
+          if (["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod"].includes(selectedPickup)) {
+            pickupCost = `฿40`;
+          }
+          else if (selectedPickup === "Others") {
+            pickupCost = `฿60`;
+          }
+        } else {
+          pickupCost = `Pickup Unavailable`;
+        }
+      }
+    
       if (selectedOption2 === "Yangon") {
         if (["Dala", "Thanlyin", "Hmawbi"].includes(selectedHomeDelivery)) {
           homeDeliveryCost = `(Negotiate for the Door2Door cost)`;
@@ -77,7 +131,7 @@ const SmallerHome = () => {
           }
         }
       }
-
+    
       else if (selectedOption2 === "Maesot") {
         if (weight < 100) {
           if (["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod"].includes(selectedHomeDelivery)) {
@@ -87,7 +141,7 @@ const SmallerHome = () => {
             homeDeliveryCost = `฿60`
           }
         }
-
+      
         else {
           homeDeliveryCost = `Door2Door Unavailable`
         }
@@ -590,7 +644,7 @@ const SmallerHome = () => {
       setShowOutput(true);
 
       transportationCost.current.innerText = `${estimatedCost}`;
-      door2doorCost.current.innerText = `${homeDeliveryCost}`;
+      door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDoor2Door:\n${homeDeliveryCost}`;
     };
 
     return (
@@ -665,23 +719,69 @@ const SmallerHome = () => {
               </div>
                 
               {homeDeliveryOptions.length > 0 && (
-                <div className="smaller-home-delivery">
-                  <h4 className="smaller-door2door-title">Door2Door</h4>
-            
-                  <select
-                    className="smaller-home-delivery-dropdown smaller-dropdown"
-                    value={selectedHomeDelivery}
-                    onChange={(e) => setSelectedHomeDelivery(e.target.value)}
-                  >
-                    <option value=""></option>
-                    {homeDeliveryOptions.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+          <div className="smaller-home-delivery-options">
+            {/* Checkboxes and dropdowns grouped together */}
+            <div className="smaller-checkbox-dropdown-container">
+
+              {/* Pickup Checkbox and Dropdown */}
+              <div className="smaller-checkbox-dropdown">
+                <input
+                  type="checkbox"
+                  id="pickup"
+                  checked={isPickupChecked}
+                  onChange={() => setIsPickupChecked(!isPickupChecked)}
+                />
+                <label htmlFor="pickup"><h4>Pickup</h4></label>
+
+                {isPickupChecked && homeDeliveryOptions.length > 0 && selectedOption1 && (
+                  <div className="smaller-pickup-location">
+                    <select
+                      className="smaller-pickup-dropdown dropdown"
+                      value={selectedPickup}
+                      onChange={(e) => setSelectedPickup(e.target.value)}
+                    >
+                      <option value=""></option>
+                      {homeDeliveryLocations[selectedOption1]?.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+              
+              {/* Door2Door Checkbox and Dropdown */}
+              <div className="checkbox-dropdown">
+                <input
+                  type="checkbox"
+                  id="door2door"
+                  checked={isDoor2DoorChecked}
+                  onChange={() => setIsDoor2DoorChecked(!isDoor2DoorChecked)}
+                />
+                <label htmlFor="door2door"><h4>Door2Door</h4></label>
+              
+                {isDoor2DoorChecked && homeDeliveryOptions.length > 0 && selectedOption2 && (
+                  <div className="smaller-home-delivery">
+                    <select
+                      className="smaller-home-delivery-dropdown dropdown"
+                      value={selectedHomeDelivery}
+                      onChange={(e) => setSelectedHomeDelivery(e.target.value)}
+                    >
+                      <option value=""></option>
+                      {homeDeliveryLocations[selectedOption2]?.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+              
+            </div>
+          </div>
+        )}
             </div>
           
             {/* Weight input with kg */}
