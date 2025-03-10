@@ -24,9 +24,9 @@ const MobileHome = () => {
       const [showOutput, setShowOutput] = useState(false);
   
       const homeDeliveryLocations = {
-        Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others", "No Door2Door"],
-        Mandalay: ["19 Street, 115 Street x 58 Street, 48 Street", "19 Street, 115 Street x 58 Street, 92 Street", "Others", "No Door2Door"],
-        Maesot : ["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod", "Others", "No Door2Door"]
+        Yangon: ["Dala", "Thanlyin", "Hmawbi", "Others"],
+        Mandalay: ["19 Street, 115 Street x 58 Street, 48 Street", "19 Street, 115 Street x 58 Street, 92 Street", "Others"],
+        Maesot : ["Hua Fai", "Naung Bwar", "Mae Pa Nuea", "Mae Pa (Moo 1)", "Tambon", "Tambon Tha Sai Lod", "Others"]
       };
   
       const transportationCost = useRef();
@@ -729,10 +729,15 @@ const MobileHome = () => {
                   type="checkbox"
                   id="pickup"
                   checked={isPickupChecked}
-                  onChange={() => setIsPickupChecked(!isPickupChecked)}
+                  onChange={() => {
+                    setIsPickupChecked(!isPickupChecked);
+                    if (isPickupChecked) {
+                      setSelectedPickup(""); // Reset dropdown value when unchecked
+                    }
+                  }}
                 />
                 <label htmlFor="pickup"><h4>Pickup</h4></label>
-
+                
                 {isPickupChecked && homeDeliveryOptions.length > 0 && selectedOption1 && (
                   <div className="mobile-pickup-location">
                     <select
@@ -757,10 +762,15 @@ const MobileHome = () => {
                   type="checkbox"
                   id="door2door"
                   checked={isDoor2DoorChecked}
-                  onChange={() => setIsDoor2DoorChecked(!isDoor2DoorChecked)}
+                  onChange={() => {
+                    setIsDoor2DoorChecked(!isDoor2DoorChecked);
+                    if (isDoor2DoorChecked) {
+                      setSelectedHomeDelivery(""); // Reset dropdown value when unchecked
+                    }
+                  }}
                 />
                 <label htmlFor="door2door"><h4>Door2Door</h4></label>
-              
+                
                 {isDoor2DoorChecked && homeDeliveryOptions.length > 0 && selectedOption2 && (
                   <div className="mobile-home-delivery">
                     <select
@@ -778,6 +788,7 @@ const MobileHome = () => {
                   </div>
                 )}
               </div>
+
               
             </div>
           </div>

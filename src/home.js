@@ -725,7 +725,12 @@ const Home = () => {
                   type="checkbox"
                   id="pickup"
                   checked={isPickupChecked}
-                  onChange={() => setIsPickupChecked(!isPickupChecked)}
+                  onChange={() => {
+                    setIsPickupChecked(!isPickupChecked);
+                    if (isPickupChecked) {
+                      setSelectedPickup(""); // Reset dropdown value when unchecked
+                    }
+                  }}
                 />
                 <label htmlFor="pickup"><h4>Pickup</h4></label>
 
@@ -753,7 +758,12 @@ const Home = () => {
                   type="checkbox"
                   id="door2door"
                   checked={isDoor2DoorChecked}
-                  onChange={() => setIsDoor2DoorChecked(!isDoor2DoorChecked)}
+                  onChange={() => {
+                    setIsDoor2DoorChecked(!isDoor2DoorChecked);
+                    if (isDoor2DoorChecked) {
+                      setSelectedHomeDelivery(""); // Reset dropdown value when unchecked
+                    }
+                  }}
                 />
                 <label htmlFor="door2door"><h4>Door2Door</h4></label>
               
