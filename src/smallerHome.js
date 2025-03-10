@@ -752,7 +752,7 @@ const SmallerHome = () => {
               </div>
               
               {/* Door2Door Checkbox and Dropdown */}
-              <div className="checkbox-dropdown">
+              <div className="smaller-checkbox-dropdown">
                 <input
                   type="checkbox"
                   id="door2door"

@@ -50,7 +50,7 @@ body {
   margin-top: 14px;
 }
 
-.mobile-home-delivery {
+.mobile-home-delivery, .mobile-pickup-location {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -143,13 +143,31 @@ div {
   font-size: 20px;
 }
 
-.mobile-device-length-input-box,
-.mobile-home-delivery-dropdown {
-  width: 185px;
+.mobile-home-delivery-dropdown, .mobile-pickup-dropdown {
+  width: 200px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
 }
 
 .mobile-device-length-input-box {
   width: 140px;
+}
+
+.mobile-home-delivery-options {
+  display: flex;
+}
+
+.mobile-checkbox-dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-checkbox-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 button.mobile-calculate-button {
