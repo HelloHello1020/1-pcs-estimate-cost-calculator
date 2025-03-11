@@ -112,7 +112,7 @@ const SmallerHome = () => {
     
       if (selectedOption2 === "Yangon") {
         if (["Dala", "Thanlyin", "Hmawbi"].includes(selectedHomeDelivery)) {
-          homeDeliveryCost = `(Negotiate for the Door2Door cost)`;
+          homeDeliveryCost = `(Negotiate for the Dropoff cost)`;
         } else if (selectedHomeDelivery === "Others") {
           if (weight <= 3) {
             homeDeliveryCost = `2500 MMK`;
@@ -124,7 +124,7 @@ const SmallerHome = () => {
     
       else if (selectedOption2 === "Mandalay") {
         if (weight > 10 || (length > 24 && width > 24 && height > 24)) {
-          homeDeliveryCost = `(Negotiate for the Door2Door cost)`;
+          homeDeliveryCost = `(Negotiate for the Dropoff cost)`;
         }
         else {
           if (selectedHomeDelivery === "19 Street, 115 Street x 58 Street, 48 Street") {
@@ -156,7 +156,7 @@ const SmallerHome = () => {
         }
       
         else {
-          homeDeliveryCost = `Door2Door Unavailable`
+          homeDeliveryCost = `Dropoff Unavailable`
         }
       }
 
@@ -657,7 +657,7 @@ const SmallerHome = () => {
       setShowOutput(true);
 
       transportationCost.current.innerText = `${estimatedCost}`;
-      door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDoor2Door:\n${homeDeliveryCost}`;
+      door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDropoff:\n${homeDeliveryCost}`;
 
       const data = {
         deviceLength: deviceLength,
@@ -823,7 +823,7 @@ const SmallerHome = () => {
                     }
                   }}
                 />
-                <label htmlFor="door2door"><h4>Door2Door</h4></label>
+                <label htmlFor="door2door"><h4>Dropoff</h4></label>
                 
                 {isDoor2DoorChecked && homeDeliveryOptions.length > 0 && selectedOption2 && (
                   <div className="smaller-home-delivery">
