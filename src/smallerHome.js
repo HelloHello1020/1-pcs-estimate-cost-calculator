@@ -48,6 +48,15 @@ const SmallerHome = () => {
       setHomeDeliveryOptions(homeDeliveryLocations[selectedOption2] || []);
     }, [selectedOption2]);
 
+    useEffect(() => {
+      if (homeDeliveryOptions.length === 0) {
+      setIsPickupChecked(false);
+      setIsDoor2DoorChecked(false);
+      setSelectedPickup(""); 
+      setSelectedHomeDelivery("");
+      }
+    }, [homeDeliveryOptions]);  
+
     const handleCalculate = async () => {
       estimatedCost = "";
       homeDeliveryCost = ""; // Reset cost
