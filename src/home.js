@@ -659,11 +659,11 @@ const Home = () => {
     }
 
     transportationCost.current.innerText = `${estimatedCost}`;
-    door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDoor2Door:\n${homeDeliveryCost}`;
+    door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDropoff:\n${homeDeliveryCost}`;
 
     const data = {
       deviceLength: deviceLength,
-      dropoff: selectedOption2,
+      dropoff: selectedHomeDelivery,
       from: selectedOption1,
       height: height,
       itemType: selectedItemOption1,

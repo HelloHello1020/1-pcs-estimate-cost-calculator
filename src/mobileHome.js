@@ -661,7 +661,7 @@ const MobileHome = () => {
 
         const data = {
           deviceLength: deviceLength,
-          dropoff: selectedOption2,
+          dropoff: setHomeDeliveryOptions,
           from: selectedOption1,
           height: height,
           itemType: selectedItemOption1,
