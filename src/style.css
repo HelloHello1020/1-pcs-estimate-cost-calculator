@@ -220,16 +220,30 @@ button.calculate-button:hover {
   }
 }
 
+@media (max-width: 1100px) {
+  .input-container {
+    margin-left: 45px;
+    margin-top: -30px;
+  }
+}
+
 @media (max-width: 1050px) {
   .input-container {
     transform: scale(0.7);
   }
   .output-container {
     transform: scale(0.7);
-    margin-top: 0;
   }
 }
 
+@media (max-height: 660px) {
+  .input-container {
+    margin-top: -60px
+  }
+  .output-container {
+    margin-top: -50px;
+  }
+}
 /*.hello-facebook-link-button {
   position: relative;
   margin-top: 85%;
