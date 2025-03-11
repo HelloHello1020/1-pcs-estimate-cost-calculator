@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Button, Card, InputNumber, Divider } from 'antd';
 
 import { db } from "./firebase"; // Correctly import db
-import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const Home = () => {
   const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]

@@ -1,6 +1,10 @@
 import "./mobileStyle.css"
 import React, { useRef, useState, useEffect } from 'react';
-import { Button, Card, InputNumber, Divider } from 'antd';
+import { Button, Card, InputNumber } from 'antd';
+
+import { db } from "./firebase"; // Correctly import db
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+
 
 const MobileHome = () => {
     const itemOptions = ["Phone", "Laptop/Macbook", "Printer", "Tablet/IPad", "Monitor", "CPU", "TV", "Air Cooler", "Air Fryer", "Guitar", "Others"]
@@ -44,7 +48,7 @@ const MobileHome = () => {
         setHomeDeliveryOptions(homeDeliveryLocations[selectedOption2] || []);
       }, [selectedOption2]);
   
-      const handleCalculate = () => {
+      const handleCalculate = async () => {
         estimatedCost = "";
         homeDeliveryCost = ""; // Reset cost
         pickupCost = "";
@@ -645,6 +649,47 @@ const MobileHome = () => {
   
         transportationCost.current.innerText = `${estimatedCost}`;
         door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDoor2Door:\n${homeDeliveryCost}`;
+
+        const data = {
+          deviceLength: deviceLength,
+          dropoff: selectedOption2,
+          from: selectedOption1,
+          height: height,
+          itemType: selectedItemOption1,
+          kg: weight,
+          length: length,
+          pickup: selectedPickup,
+          to: selectedOption2,
+          width: width,
+        };
+              
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear().toString(); // "2025"
+        const currentMonth = currentDate.toLocaleString("en-US", { month: "long" }).toLowerCase(); // "march", "april", etc.
+      
+        const docRef = doc(db, currentYear, currentMonth);
+      
+        try {
+          const docSnapshot = await getDoc(docRef);
+      
+          if (docSnapshot.exists()) {
+            const mapValue = docSnapshot.data().map || 0;
+      
+            await updateDoc(docRef, {
+              map: mapValue + 1,
+              [`entries.${mapValue + 1}`]: data,
+            });
+          } else {
+            await setDoc(docRef, {
+              map: 1,
+              entries: { 1: data },
+            });
+          }
+      
+          console.log("Data stored successfully!");
+        } catch (error) {
+          console.error("Error storing data: ", error);
+        }
       }
       
     return (
