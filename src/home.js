@@ -17,6 +17,7 @@ const Home = () => {
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
+  const [maxWeight, setMaxWeight] = useState();
   const [homeDeliveryOptions, setHomeDeliveryOptions] = useState([]);
   const [selectedHomeDelivery, setSelectedHomeDelivery] = useState("");
 
@@ -59,7 +60,21 @@ const Home = () => {
       setSelectedPickup(""); 
       setSelectedHomeDelivery("");
     }
-  }, [homeDeliveryOptions]);  
+  }, [homeDeliveryOptions]);
+
+  useEffect(() => {
+    if (selectedOption1 === "Maesot" && 
+      ["Samut Sakhon", "Nakhon Phanom", "Phetchaburi", "Ranong",
+        "Nakhon Sawan", "Ratchaburi", "Samut Prakan", "Pathum Thani",
+        "Kantang Trang", "Phuket", "Nonthaburi"
+      ].includes(selectedOption2)) {
+        setMaxWeight(15)
+        setWeight(15)
+    }
+    else {
+      setMaxWeight("")
+    }
+  }, [selectedOption1, selectedOption2])
 
   const handleCalculate = async () => {
     estimatedCost = "";
@@ -428,7 +443,7 @@ const Home = () => {
               estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
             }
             else if (length > 6 || width > 6 || height > 6) {
-              estimatedCost = `฿130\n(฿50 for extra box size)`
+              estimatedCost = `฿150\n(฿70 for extra box size)`
             }
             else if (length <= 6 || width <= 6 || height <= 6) {
               estimatedCost = `฿80`
@@ -439,7 +454,7 @@ const Home = () => {
               estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
             }
             else if (length > 8 || width > 8 || height > 8) {
-              estimatedCost = `฿150\n(฿50 for extra box size)`
+              estimatedCost = `฿170\n(฿70 for extra box size)`
             }
             else if (length <= 8 || width <= 8 || height <= 8) {
               estimatedCost = `฿100`
@@ -461,11 +476,19 @@ const Home = () => {
               estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
             }
             else if (length <= 24 || width <= 24 || height <= 24) {
-              estimatedCost = `฿${weight * 50}`
+              estimatedCost = `฿${weight * 45}`
             }
           }
-          if (weight > 10) {
-            estimatedCost = `฿${weight * 45}\n(Only using weight)\nClick the link below to negotiate about the full price`
+          if (weight >= 10.1 && weight <= 15) {
+            if (length > 24 || width > 24 || height > 24) {
+              estimatedCost = `Too large for estimation\nClick the link below to negotiate about the full price`
+            }
+            else if (length <= 24 || width <= 24 || height <= 24) {
+              estimatedCost = `฿${weight * 40}`
+            }
+          }
+          if (weight > 15) {
+            estimatedCost = `Click the link below to negotiate about the full price`
           }
         }
 
@@ -861,6 +884,7 @@ const Home = () => {
             addonAfter="kg"
             value={weight}
             onChange={setWeight}
+            max={maxWeight}
             min={0}
           />
         </div>
