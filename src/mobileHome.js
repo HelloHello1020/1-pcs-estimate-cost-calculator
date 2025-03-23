@@ -687,6 +687,8 @@ const MobileHome = () => {
     transportationCost.current.innerText = `${estimatedCost}`;
     door2doorCost.current.innerText = `Pickup:\n${pickupCost}\n\nDropoff:\n${homeDeliveryCost}`;
 
+    setShowOutput(true)
+
     const data = {
       deviceLength: deviceLength,
       dropoff: selectedHomeDelivery,
